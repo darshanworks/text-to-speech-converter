@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>VoiceCraft — Text to Speech</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.2.0/remixicon.min.css"
+    />
+    <link rel="stylesheet" href="./css/style.css">
+  </head>
+  <body>
+    <!-- Header -->
+    <header>
+      <div class="brand">
+        <h1>Voice<span>Craft</span></h1>
+        <p>Text to speech converter</p>
+      </div>
+      <button id="themeToggle" aria-label="Toggle theme">
+        <i class="ri-moon-line" id="themeIcon"></i>
+      </button>
+    </header>
+
+    <!-- Main Card -->
+    <main class="card" role="main">
+      <!-- Textarea -->
+      <div class="textarea-wrap">
+        <textarea
+          id="textInput"
+          placeholder="Type or paste your text here…"
+          aria-label="Text to convert to speech"
+          maxlength="5000"
+        ></textarea>
+        <div class="char-count" id="charCount" aria-live="polite">0 / 5000</div>
+      </div>
+
+      <!-- Stats -->
+      <div class="stats-bar" aria-live="polite">
+        <span><i class="ri-text"></i> <span id="wordCount">0 words</span></span>
+        <span
+          ><i class="ri-time-line"></i>
+          <span id="readTime">~0 min read</span></span
+        >
+      </div>
+
+      <div class="divider"></div>
+
+      <!-- Voice + Controls -->
+      <p class="section-label">
+        <i class="ri-settings-3-line"></i> Voice Settings
+      </p>
+      <div class="controls">
+        <div class="control-group">
+          <label for="voiceSelect"><i class="ri-mic-line"></i> Voice</label>
+          <select id="voiceSelect" aria-label="Select voice"></select>
+        </div>
+        <div class="control-group">
+          <label for="volumeRange"
+            ><i class="ri-volume-up-line"></i> Volume</label
+          >
+          <div class="slider-row">
+            <input
+              type="range"
+              id="volumeRange"
+              min="0"
+              max="1"
+              step="0.1"
+              value="1"
+              aria-label="Volume"
+            />
+            <span id="volumeVal">1.0 • Loud</span>
+          </div>
+        </div>
+        <div class="control-group">
+          <label for="rateRange"><i class="ri-speed-up-line"></i> Rate</label>
+          <div class="slider-row">
+            <input
+              type="range"
+              id="rateRange"
+              min="0.5"
+              max="2"
+              step="0.1"
+              value="1"
+              aria-label="Speech rate"
+            />
+            <span id="rateVal">1.0 • Normal</span>
+          </div>
+        </div>
+        <div class="control-group">
+          <label for="pitchRange"
+            ><i class="ri-bar-chart-line"></i> Pitch</label
+          >
+          <div class="slider-row">
+            <input
+              type="range"
+              id="pitchRange"
+              min="0.5"
+              max="2"
+              step="0.1"
+              value="1"
+              aria-label="Speech pitch"
+            />
+            <span id="pitchVal">1.0 • Normal</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <!-- Visualizer -->
+      <div class="visualizer" id="visualizer" aria-hidden="true">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+      </div>
+
+      <!-- Status -->
+      <div class="status-row">
+        <div
+          class="status-badge"
+          id="statusBadge"
+          role="status"
+          aria-live="polite"
+        >
+          <div class="status-dot"></div>
+          <span id="statusText">Ready</span>
+        </div>
+      </div>
+
+      <!-- Primary actions -->
+      <div class="btn-row">
+        <button class="btn btn-primary" id="btnPlay" aria-label="Play speech">
+          <i class="ri-play-fill"></i> Speak
+        </button>
+        <button
+          class="btn btn-outline"
+          id="btnPause"
+          disabled
+          aria-label="Pause speech"
+        >
+          <i class="ri-pause-fill"></i> Pause
+        </button>
+        <button
+          class="btn btn-outline"
+          id="btnResume"
+          disabled
+          aria-label="Resume speech"
+        >
+          <i class="ri-play-circle-line"></i> Resume
+        </button>
+        <button
+          class="btn btn-danger"
+          id="btnStop"
+          disabled
+          aria-label="Stop speech"
+        >
+          <i class="ri-stop-fill"></i> Stop
+        </button>
+      </div>
+
+      <div class="divider"></div>
+
+      <!-- Utility actions -->
+      <div class="util-row">
+        <button
+          class="btn btn-outline btn-sm"
+          id="btnCopy"
+          aria-label="Copy text"
+        >
+          <i class="ri-clipboard-line"></i> Copy
+        </button>
+        <button
+          class="btn btn-outline btn-sm"
+          id="btnDownload"
+          aria-label="Download text"
+        >
+          <i class="ri-download-line"></i> Download
+        </button>
+        <button
+          class="btn btn-outline btn-sm"
+          id="btnSample"
+          aria-label="Load sample text"
+        >
+          <i class="ri-magic-line"></i> Sample
+        </button>
+        <button
+          class="btn btn-danger btn-sm"
+          id="btnClear"
+          aria-label="Clear text"
+        >
+          <i class="ri-delete-bin-line"></i> Clear
+        </button>
+      </div>
+    </main>
+
+    <!-- Toast -->
+    <div id="toast" role="alert" aria-live="assertive">
+      <i class="ri-checkbox-circle-line"></i>
+      <span id="toastMsg">Done</span>
+    </div>
+
+    <script src="/js/app.js"></script>
+  </body>
+</html>
