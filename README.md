@@ -24,7 +24,7 @@ A modern and responsive Text-to-Speech web application built using HTML, CSS, an
 Add your deployed link here:
 
 ```bash
-https://your-live-demo-link.com
+https://darshanworks.github.io/text-to-speech-converter/
 ```
 
 ---
@@ -34,7 +34,7 @@ https://your-live-demo-link.com
 Add screenshots here after deployment.
 
 ```bash
-assets/preview.png
+./screenshots/preview.png
 ```
 
 ---
@@ -61,6 +61,9 @@ voicecraft-text-to-speech/
 ├── js/
 │   └── script.js
 │
+├── screenshots/
+│   └── preview.png
+│
 ├── index.html
 ├── README.md
 ├── LICENSE
@@ -75,7 +78,7 @@ voicecraft-text-to-speech/
 Clone the repository:
 
 ```bash
-git clone https://github.com/your-username/voicecraft-text-to-speech.git
+git clone https://github.com/darshanworks/text-to-speech-converter.git
 ```
 
 Open the project folder:
@@ -119,3 +122,4 @@ This project is licensed under the MIT License.
 ## 👨‍💻 Author
 
 Developed by Darshan Malagonvkar
+- GitHub: https://github.com/darshanworks
