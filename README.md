@@ -65,6 +65,7 @@ voicecraft-text-to-speech/
 │   └── preview.png
 │
 ├── index.html
+├── favicon.ico
 ├── README.md
 ├── LICENSE
 ├── CONTRIBUTING.md
